@@ -1,3 +1,3 @@
-# LwM2M Connectivity Monitoring
+# LwM2M Fill Level
 
-This Zephyr module provides an API LwM2M object 3435.
+This Zephyr module provides an API for LwM2M object 3435.
