@@ -91,7 +91,7 @@ int lcz_lwm2m_fill_level_set(uint16_t instance, double value)
 		/* Read the height so that the fill level can be calculated */
 		resource = CONTAINER_HEIGHT_FILLING_SENSOR_RID;
 		r = LCZ_SNPRINTK(path, "%u/%u/%u", type, instance, resource);
-		if (r != 0) {
+		if (r < 0) {
 			break;
 		}
 		r = lwm2m_engine_get_u32(path, &height);
@@ -115,8 +115,8 @@ int lcz_lwm2m_fill_level_set(uint16_t instance, double value)
 
 		/* Write optional resource (don't care if it fails) */
 		resource = ACTUAL_FILL_LEVEL_FILLING_SENSOR_RID;
-		LCZ_SNPRINTK(path, "%u/%u/%u", type, instance, resource);
-		if (r != 0) {
+		r = LCZ_SNPRINTK(path, "%u/%u/%u", type, instance, resource);
+		if (r < 0) {
 			break;
 		}
 		lwm2m_engine_set_u32(path, level);
@@ -124,7 +124,7 @@ int lcz_lwm2m_fill_level_set(uint16_t instance, double value)
 		/* Writing this resource will cause full/empty to be re-evaluated */
 		resource = ACTUAL_FILL_PERCENTAGE_FILLING_SENSOR_RID;
 		r = LCZ_SNPRINTK(path, "%u/%u/%u", type, instance, resource);
-		if (r != 0) {
+		if (r < 0) {
 			break;
 		}
 		r = lwm2m_engine_set_float(path, &fill_percent);
