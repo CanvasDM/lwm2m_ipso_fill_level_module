@@ -6,7 +6,7 @@
 menuconfig LCZ_LWM2M_FILL_LEVEL
 	bool "Enable LwM2M Fill Level Object"
 	depends on LCZ_LWM2M_UTIL
-	depends on LCZ_LWM2M_IPSO_FILLING_SENSOR
+	depends on LWM2M_IPSO_FILLING_SENSOR
 	select LCZ_SNPRINTK
 
 if LCZ_LWM2M_FILL_LEVEL
