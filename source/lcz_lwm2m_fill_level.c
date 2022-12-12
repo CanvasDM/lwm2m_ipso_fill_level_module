@@ -80,7 +80,7 @@ int lcz_lwm2m_fill_level_set(uint16_t instance, double value)
 	uint16_t type = IPSO_OBJECT_FILLING_LEVEL_SENSOR_ID;
 	char path[LWM2M_MAX_PATH_STR_LEN];
 	double fill_percent;
-	uint32_t distance = 10.0;
+	uint32_t distance = (uint32_t)value;
 	uint32_t height = 0;
 	uint32_t level;
 	uint16_t resource;
@@ -108,7 +108,7 @@ int lcz_lwm2m_fill_level_set(uint16_t instance, double value)
 		}
 		fill_percent = (double)(((float)level / (float)height) * 100.0);
 
-		/* The suggested sensor has a minimum range of 50 cm */
+		/* The suggested sensor has a minimum range of 50 cm (log rounds down). */
 		LOG_DBG("height: %u level: %u measured distance: %u percent: %d", height, level,
 			distance, (uint32_t)fill_percent);
 
